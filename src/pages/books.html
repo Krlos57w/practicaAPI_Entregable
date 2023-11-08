@@ -21,7 +21,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span><!--span para que se vea el icono-->
             </button>
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -31,7 +31,7 @@
 
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">books</a>
+                    <a class="nav-link active" aria-current="page" href="#">books</a><!--active para que se vea activo-->
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
@@ -46,7 +46,7 @@
     </header>
     <h1>Books</h1>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBook">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBook"><!--data-bs-toggle="modal" data-bs-target="#createBook" para que se abra el modal-->
       Aca para agregar libros
     </button>
 
@@ -60,22 +60,45 @@
           </div>
           <div class="modal-body">
             <!--formulario de ingreso de libros-->
+            <!--input nombre del libro-->
+            <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nombre del libro</span>
+              <input id="name" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"><!--se agrega el id para que se pueda llamar desde el js-->
+            </div>
 
             <!--input nombre del autor del libro-->
             <div class="input-group input-group-sm mb-3">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nombre del Autor del libro</span>
-              <input id="autor" name="autor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <!--input nombre del libro-->
-            <div class="input-group input-group-sm mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Nombre del libro</span>
-              <input id="name" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              <input id="autor" name="autor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"><!--se agrega el id para que se pueda llamar desde el js-->
             </div>
 
+            
+             <!--input precio del libro-->
+             <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Precio libro</span>
+              <input id="precio" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"><!--se agrega el id para que se pueda llamar desde el js-->
+            </div>
+
+              <!--input numero de paginas del libro-->
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Numero de paginas</span>
+                <input id="numeroPaginas" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"><!--se agrega el id para que se pueda llamar desde el js-->
+              </div>
+              
+              <!--input estado del libro con checkbox-->
+              <label>
+                <input type="checkbox" id="cbox1"/>Este libro esta activo
+              </label>
+
+                <br/>
+                <input type="checkbox" id="cbox2"/>
+                <label for="cbox2">Este Libro esta inactivo</label>
+
+
             <!--input select genero del libro-->
-            <select id="genre" name="genre" class="form-select form-select-lg mb-3" aria-label="Large select example">
+            <select id="genre" name="genre" class="form-select form-select-lg mb-3" aria-label="Large select example"><!--se agrega el id para que se pueda llamar desde el js-->
               <option selected>Seleccione Genero</option>
-              <option value="Terror">Terror</option>
+              <option value="Terror">Terror</option><!--value para que se pueda llamar desde el js-->
               <option value="Drama">Drama</option>
               <option value="Suspenso">Suspenso</option>
             </select>
@@ -83,8 +106,8 @@
             ...
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button id="saveBookButton" type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button><!--data-bs-dismiss="modal" para que se cierre el modal-->
+            <button id="saveBookButton" type="button" class="btn btn-primary">Guardar</button><!--se agrega el id para que se pueda llamar desde el js-->
           </div>
         </div>
       </div>
@@ -138,8 +161,8 @@
 
             <!--input select genero del libro-->
             <select id="editBookGenre" name="genre" class="form-select form-select-lg mb-3" aria-label="Large select example">
-              <option selected>Seleccione Genero</option>
-              <option value="Terror">Terror</option>
+              <option selected>Seleccione Genero</option><!--seleccionar genero-->
+              <option value="Terror">Terror</option><!--genero terror-->
               <option value="Drama">Drama</option>
               <option value="Suspenso">Suspenso</option>
             </select>
@@ -155,6 +178,41 @@
     </div>
     <!-- fin Modal editar-->
 
+    <!-- Modal para mostrar libros-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <!-- cards para mostrar libros-->
+              <div id="cardBook" class="card" style="width: 18rem;">
+                <img src="libro.jpg" class="card-img-top" alt="libro">
+                <div class="card-body">
+                  <h5 class="card-title">Card libro</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  
+                  <p>Libro ID: <span id="ShowCardBookID"></span> </p>
+                  <p>Titulo libro:<span id="ShowCardBookTitle"></span> </p>
+
+                </div>
+              </div><!--fin cards para mostrar libros-->
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!--button id="showCard" type="button" class="btn btn-primary">mostrar cards</button-->
+          </div>
+        </div>
+      </div>
+    </div><!--fin Modal para mostrar libros-->
+
+    
+
+
         <div class="container py-4">
             <div class="py-lg-5 mb-4 bg-body-tertiary rounded-3"> <!--condicion para tamaño-->
                 <table class="table table-hover"><!--tabla-->
@@ -164,8 +222,13 @@
                     <th>Titulo</th>
                     <th>Genero</th>
                     <th>Autor</th>
+                    
                     <th>Editar</th>
                     <th>Eliminar</th>
+                    <th>Mostrar</th>
+                    <th>Precio</th>
+                    <th>Numero de paginas</th>
+                    <th>estado</th>
                   </tr>
                 </thead>
 

@@ -29,20 +29,17 @@ document.addEventListener('DOMContentLoaded', async function () {//cuando se car
         const bookName = document.getElementById('editBookTitle').value;//obtenemos el valor del input nombre del libro, value se usa para obtener el valor del titulo,value a diferencia de innerHTML se usa para obtener el valor de un input
         const bookAuthor = document.getElementById('editBookAuthor').value;//obtenemos el valor del input autor del libro
         const bookGenre = document.getElementById('editBookGenre').value;//obtenemos el valor del input genero del libro
-        await updateBookRequest({bookID, bookName, bookAuthor, bookGenre});//llamamos a la funcion de actualizar libro
+        const bookPrecio = document.getElementById('editBookPrecio').value;//obtenemos el valor del input precio del libro
+        const bookNumeroPaginas = document.getElementById('editBookNumeroPaginas').value;//obtenemos el valor del input numero de paginas del libro
+        const bookEstado = document.getElementById('cbox1').checked;//obtenemos el valor del input estado del libro
+
+        await updateBookRequest({bookID, bookName, bookAuthor, bookGenre, bookPrecio, bookNumeroPaginas,bookEstado});//llamamos a la funcion de actualizar libro
         hideModal('editBookModal');//ocultamos el modal
         await getBoooksResquest();//llamamos a la funcion de obtener libros        
     });
 
     
-    const showCardButton = document.getElementById('showCard');//boton de mostrar optenido por id del modal
-    showCardButton.addEventListener('click', async function () {//evento de click
-        const bookID = document.getElementById('ShowCardBookID').innerHTML;//obtenemos el id del libro a mostrar
-        const bookTitle = document.getElementById('ShowCardBookTitle').innerHTML;//obtenemos el titulo del libro a mostrar
-        await mostarLibro(bookID, bookTitle);//llamamos a la funcion de mostrar libro
-        hideModal('exampleModal');//ocultamos el modal
-        await getBoooksResquest();//llamamos a la funcion de obtener libros        
-    });
+    
 
 
 });  
@@ -63,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async function () {//cuando se car
 
           
           <td>
-            <button type="button" class="btn btn-primary" onclick="editBook('${book.id}','${book.title}','${book.genre}','${book.author}')">Editar<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <button type="button" class="btn btn-primary" onclick="editBook('${book.id}','${book.title}','${book.genre}','${book.author}','${book.precio}','${book.numeroPaginas}','${book.estado}')">Editar<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
           </svg></button>
@@ -74,9 +71,7 @@ document.addEventListener('DOMContentLoaded', async function () {//cuando se car
           </td>
 
           <td>
-          <button id="showCard" onclick="mostrarBook('${book.id}',${book.title}) type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          mostrar <i class="bi bi-eye"></i>
-          </button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getBookRequest('${book.id}','${book.title}','${book.genre}','${book.author}','${book.precio}','${book.numeroPaginas}')" > mostrar <i class="bi bi-eye"></i></button>
           </td>
 
           <td>${book.precio}</td>
@@ -97,29 +92,7 @@ document.addEventListener('DOMContentLoaded', async function () {//cuando se car
     tableBody.innerHTML = arrayBooks;
 }
 
-//funcion para obtener libro con metodo get al servidor
-async function obtenerLibro({id}) {//funcion para obtener libro
-  try{
-    let request = await fetch('http://localhost:3000/books', {//hacemos la peticion al servidor
-    method: 'GET',//metodo get para obtener libro
-    headers: {
-        "Content-Type": 'application/json'//tipo de contenido que se envia
-    },
-    body: JSON.stringify({//convertimos los datos a json
-        id: id,//obtenemos el id del libro
-        title: bookName,//obtenemos el nombre del libro
-    })
-});
-let data = await request.json();
-if (data.ok) {//si se obtuvo el libro el servidor nos devuelve un ok
-    alert('libro obtenido');//mostramos mensaje de libro obtenido
-} else {  
-  alert('Error al optener libros');
-} 
-  }catch (error) {  
-    alert('Error');
-  }
-}
+
    
 
 
@@ -166,6 +139,26 @@ async function saveBookRequest({bookName, bookAuthor, bookGenre, bookPrecio, boo
     }
   }
 
+  //funcion para obtener un libro con metodo get al servidor
+  async function getBookRequest(id, title, genre, author, precio, numeroPaginas) {//funcion para obtener libro
+    try {
+        let request = await fetch(`http://localhost:3000/books/${id}`, {//hacemos la peticion al servidor
+            method: 'GET'//metodo get para obtener libro
+        });
+        let data = await request.json();
+        if (data.ok) {//si se obtuvo el libro el servidor nos devuelve un ok
+            alert('Libro Obtenido Satisfactoriamente');//mostramos mensaje de libro obtenido
+            mostrarBook(id, title, genre, author, precio, numeroPaginas);//llamamos a la funcion de mostrar libro
+        } else {
+          alert('Error getting book');
+        }
+    } catch (error) {
+        //console.log(error);
+    }
+  }
+
+
+
   async function deleteBookRequest(id) {//funcion para eliminar libro
     try {
         let request = await fetch(`http://localhost:3000/books/${id}`, {//hacemos la peticion al servidor
@@ -184,7 +177,7 @@ async function saveBookRequest({bookName, bookAuthor, bookGenre, bookPrecio, boo
     }
   }
 
-  async function updateBookRequest({bookID, bookName, bookAuthor, bookGenre}) {//funcion para actualizar libro
+  async function updateBookRequest({bookID, bookName, bookAuthor, bookGenre, bookPrecio, bookNumeroPaginas, bookEstado}) {//funcion para actualizar libro
     try {
         let request = await fetch(`http://localhost:3000/books/${bookID}`, {//hacemos la peticion al servidor
             method: 'PUT',//metodo put para actualizar libro
@@ -194,7 +187,10 @@ async function saveBookRequest({bookName, bookAuthor, bookGenre, bookPrecio, boo
             body: JSON.stringify({//convertimos los datos a json
                 title: bookName,//obtenemos el nombre del libro
                 author: bookAuthor,
-                genre: bookGenre
+                genre: bookGenre,
+                precio: bookPrecio,
+                numeroPaginas: bookNumeroPaginas,
+                estado: bookEstado
             })
         });
         const data = await request.json();
@@ -232,19 +228,32 @@ async function saveBookRequest({bookName, bookAuthor, bookGenre, bookPrecio, boo
     showModal('deleteBookModal');//mostramos el modal
   }
 
-  function editBook(id, title, genre, author) {//funcion para editar libro
+  function editBook(id, title, genre, author, precio, numeroPaginas, estado) {//funcion para editar libro
     document.getElementById('editBookID').innerHTML = id;//obtenemos el id del libro a editar, innerHTML para obtener el valor del id
     document.getElementById('editBookTitle').value = title;//obtenemos el titulo del libro a editar, value para obtener el valor del titulo
     document.getElementById('editBookGenre').value = genre;//obtenemos el genero del libro a editar
     document.getElementById('editBookAuthor').value = author;//obtenemos el autor del libro a editar
+    document.getElementById('editBookPrecio').value = precio;//obtenemos el precio del libro a editar
+    document.getElementById('editBookNumeroPaginas').value = numeroPaginas;//obtenemos el numero de paginas del libro a editar
+    document.getElementById('cbox1').checked = estado;//obtenemos el estado del libro a editar
+    
+
     showModal('editBookModal');//mostramos el modal
   }
 
-  function mostrarBook(id, title) {//funcion para mostrar libro
+  function mostrarBook(id, title, genre, author, precio, numeroPaginas) {//funcion para mostrar libro
     document.getElementById('ShowCardBookID').innerHTML = id;//obtenemos el id del libro a mostrar
     document.getElementById('ShowCardBookTitle').innerHTML = title;//obtenemos el titulo del libro a mostrar
-    showModal('exampleModal');//mostramos el modal
-  }
+    document.getElementById('ShowCardBookGenre').innerHTML = genre;//obtenemos el genero del libro a mostrar
+    document.getElementById('ShowCardBookAuthor').innerHTML = author;//obtenemos el autor del libro a mostrar
+    document.getElementById('ShowCardBookPrecio').innerHTML = precio;//obtenemos el precio del libro a mostrar
+    document.getElementById('ShowCardBookNumeroPaginas').innerHTML = numeroPaginas;//obtenemos el numero de paginas del libro a mostrar
+   // showModal('ShowCardBookModal');//mostramos el modal
+   
+
+  } 
+
+  
 
   
  

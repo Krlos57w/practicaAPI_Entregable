@@ -1,0 +1,123 @@
+body
+{
+    margin: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /*height: 200vh;*/
+    background-color: rgb(78, 113, 228, 0.5);
+    
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 20%; /* El valor 50% crea un borde redondeado completo, convirtiendo la imagen en un círculo */
+   
+    
+}
+
+a:focus{
+    background-color: black;
+    color: #d2dbd9;
+    font-size: 18px;
+}
+
+a:hover{
+    background-color: black;
+    color: #d2dbd9;
+    font-size: 18px;
+}
+
+.perfil-laboral{
+    margin-left: 10px;
+    padding: 10px;
+    text-align: justify;
+    border-radius: 20px;
+    box-shadow: -10px 4px 2px rgb(110, 110, 180,1);
+    background-color: rgba(71, 113, 204, 0.8);
+
+
+}
+
+.EDUCACIÓN{
+    margin-left: 20px;
+    margin-top: 20px;
+    padding-left: 10px;
+    border-radius: 20px;
+    box-shadow: -10px 4px 2px rgb(110, 110, 180,1);
+    background-color: rgba(128, 123, 133, 0.8);
+    color: black;
+    font-weight: bolder;
+    text-align: justify;  
+   
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    flex-direction: row;
+}
+
+.contenido {
+    flex: 1;
+    padding: 20px;
+   
+}
+
+
+
+#img_educacion{
+    max-width: 60%;
+    height: auto;
+    margin-right: 20px;
+    opacity: 1;
+    
+    
+
+}
+
+
+
+.REFERENCIAS-LABORALES{
+    margin-left: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    box-shadow: -10px 4px 2px rgb(110, 110, 180,1);
+    background-color: rgba(51, 105, 221, 0.8);
+    text-align: center;
+}
+
+#img_ref_laboral{
+    max-width: 20%;
+    height: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.EXPERIENCIA-LABORAL{
+    margin-left: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    box-shadow: -10px 4px 2px rgb(110, 110, 180,1);
+    background-color: rgb(110, 110, 180,1);
+}
+
+.PROYECTOS-HOBBIES-CITA{
+    margin-left: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    box-shadow: -10px 4px 2px rgb(110, 110, 180,1);
+    background-color: rgba(29, 235, 63, 0.562);
+}
+
+
+
+
+
+        
+  

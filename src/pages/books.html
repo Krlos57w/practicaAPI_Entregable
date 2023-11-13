@@ -34,7 +34,7 @@
                     <a class="nav-link active" aria-current="page" href="#">books</a><!--active para que se vea activo-->
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="../../HOJA_DE_VIDA_CARLOS_MELO/HOJA_VIDA_CARLOS_MELO.html" target="_blank">Hoja de vida</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
@@ -87,12 +87,11 @@
               
               <!--input estado del libro con checkbox-->
               <label>
-                <input type="checkbox" id="cbox1"/>Este libro esta activo
+                <input type="checkbox" id="cbox1"/> Libro esta activo
               </label>
 
                 <br/>
-                <input type="checkbox" id="cbox2"/>
-                <label for="cbox2">Este Libro esta inactivo</label>
+                
 
 
             <!--input select genero del libro-->
@@ -159,6 +158,26 @@
               <input id="editBookTitle" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
             </div>
 
+            <!--input precio del libro-->
+            <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Precio libro</span>
+              <input id="editBookPrecio" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+              <!--input numero de paginas del libro-->
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Numero de paginas</span>
+                <input id="editBookNumeroPaginas" name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              
+              <!--input estado del libro con checkbox-->
+              <label>
+                <input type="checkbox" id="cbox1"/> libro esta activo
+              </label>
+
+                
+
+
             <!--input select genero del libro-->
             <select id="editBookGenre" name="genre" class="form-select form-select-lg mb-3" aria-label="Large select example">
               <option selected>Seleccione Genero</option><!--seleccionar genero-->
@@ -183,7 +202,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Card libro</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -193,10 +212,14 @@
                 <img src="libro.jpg" class="card-img-top" alt="libro">
                 <div class="card-body">
                   <h5 class="card-title">Card libro</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Descripción.</p>
                   
                   <p>Libro ID: <span id="ShowCardBookID"></span> </p>
-                  <p>Titulo libro:<span id="ShowCardBookTitle"></span> </p>
+                  <p>Titulo libro: <span id="ShowCardBookTitle"></span> </p>
+                  <p>Genero libro: <span id="ShowCardBookGenre"></span> </p>
+                  <p>Autor libro: <span id="ShowCardBookAuthor"></span> </p>
+                  <p>Precio libro: <span id="ShowCardBookPrecio"></span> </p>
+                  <p>Numero de paginas libro: <span id="ShowCardBookNumeroPaginas"></span> </p>
 
                 </div>
               </div><!--fin cards para mostrar libros-->
@@ -241,5 +264,6 @@
             </div>
         </div>
         <script src="../../src/js/books.js"></script>
+        
   </body>
 </html>
